@@ -29,6 +29,7 @@ import com.daffa.minimisi.R
 import com.daffa.minimisi.presentation.components.LockScreenOrientation
 import com.daffa.minimisi.presentation.ui.theme.Primary500
 import com.daffa.minimisi.presentation.ui.theme.Typography
+import com.daffa.minimisi.presentation.util.Navigation
 import com.daffa.minimisi.presentation.util.Screen
 import com.daffa.minimisi.util.Constants
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
@@ -44,7 +45,7 @@ fun SplashScreen(
     val alpha = remember {
         Animatable(0f)
     }
-    val nextDestination = Screen.LoginScreen.route
+    val nextDestination = Screen.OnBoardingScreen.route
     val systemUiController = rememberSystemUiController()
     systemUiController.isStatusBarVisible = false
 

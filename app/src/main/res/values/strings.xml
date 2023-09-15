@@ -2,4 +2,16 @@
     <string name="app_name">MiniMisi</string>
     <string name="minimisi_logo">MiniMisi Logo</string>
     <string name="splash_image">Splash Image</string>
+    <string name="onboarding_image">OnBoarding Image</string>
+    <string name="sudah_punya_akun">Sudah punya akun?</string>
+    <string name="login">Login</string>
+    <string name="skip">Skip</string>
+    <string name="lanjutkan">Lanjutkan</string>
+    <string name="daftarkan_saya_sekarang">Daftarkan Saya Sekarang!</string>
+    <string name="onboard_desc_1">Kami menyediakan kumpulan \"misi\"\nyang lengkap dan beragam</string>
+    <string name="onboard_title_1">Hasilkan Uang\ndengan Mudah</string>
+    <string name="onboard_title_2">Cari Pekerjaan\nyang Ideal</string>
+    <string name="onboard_desc_2">Temukan \"misi\" yang\npaling cocok untuk kamu</string>
+    <string name="onboard_title_3">Capai Mimpimu\ndengan MiniMisi</string>
+    <string name="onboard_desc_3">Kami akan bantu menemukan \"misi\"\nyang paling sesuai sama kamu!</string>
 </resources>

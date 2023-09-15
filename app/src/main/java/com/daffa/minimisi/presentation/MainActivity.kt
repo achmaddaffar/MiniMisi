@@ -24,7 +24,7 @@ import com.daffa.minimisi.presentation.util.Navigation
 class MainActivity : ComponentActivity() {
     @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {
-        enableEdgeToEdge()
+//        enableEdgeToEdge()
         super.onCreate(savedInstanceState)
         setContent {
             MiniMisiTheme {

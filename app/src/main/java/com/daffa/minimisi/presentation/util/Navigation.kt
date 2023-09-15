@@ -6,6 +6,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import com.daffa.minimisi.presentation.login.LoginScreen
+import com.daffa.minimisi.presentation.onboarding.OnBoardingScreen
 import com.daffa.minimisi.presentation.splash.SplashScreen
 
 @Composable
@@ -14,38 +15,39 @@ fun Navigation(
 ) {
     NavHost(
         navController = navController,
-        startDestination = Navigation.SplashNavigation.route
+        startDestination = Navigation.AuthNavigation.route
     ) {
         navigation(
-            startDestination = Navigation.SplashNavigation.startDestination,
-            route = Navigation.SplashNavigation.route
+            startDestination = Navigation.AuthNavigation.startDestination,
+            route = Navigation.AuthNavigation.route
         ) {
             composable(Screen.SplashScreen.route) {
                 SplashScreen(navController = navController)
             }
             composable(Screen.OnBoardingScreen.route) {
-                
-            }
-        }
-
-        navigation(
-            startDestination = Navigation.AuthNavigation.startDestination,
-            route = Navigation.AuthNavigation.route
-        ) {
-            composable(Screen.LoginScreen.route) {
-                LoginScreen(navController = navController)
+                OnBoardingScreen(navController = navController)
             }
             composable(Screen.RegisterScreen.route) {
 
             }
+            composable(Screen.LoginScreen.route) {
+
+            }
+        }
+
+        navigation(
+            startDestination = Navigation.HomeNavigation.startDestination,
+            route = Navigation.HomeNavigation.route
+        ) {
+
         }
     }
 }
 
-private sealed class Navigation(
+sealed class Navigation(
     val startDestination: String,
     val route: String,
 ) {
-    object SplashNavigation : Navigation(Screen.SplashScreen.route, "splash_navigation")
-    object AuthNavigation : Navigation(Screen.LoginScreen.route, "auth_navigation")
+    object AuthNavigation : Navigation(Screen.SplashScreen.route, "auth_navigation")
+    object HomeNavigation : Navigation(Screen.HomeScreen.route, "home_navigation")
 }
