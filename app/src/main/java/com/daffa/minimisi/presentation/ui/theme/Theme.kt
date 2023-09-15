@@ -19,13 +19,14 @@ import androidx.core.view.WindowCompat
 private val DarkColorScheme = darkColorScheme(
     primary = Primary500,
     secondary = Slate300,
-    tertiary = Primary50
+    tertiary = Primary50,
 )
 
 private val LightColorScheme = lightColorScheme(
-    primary = Color.Red,
+    primary = Primary500,
     secondary = Slate300,
-    tertiary = Primary50
+    tertiary = Primary50,
+    background = Slate25
 
     /* Other default colors to override
     background = Color(0xFFFFFBFE),
@@ -43,17 +44,9 @@ fun MiniMisiTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     // Dynamic color is available on Android 12+
     dynamicColor: Boolean = true,
-    content: @Composable () -> Unit
+    content: @Composable () -> Unit,
 ) {
-    val colorScheme = when {
-        dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
-            val context = LocalContext.current
-            if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
-        }
-
-        darkTheme -> DarkColorScheme
-        else -> LightColorScheme
-    }
+    val colorScheme = LightColorScheme
     val view = LocalView.current
     if (!view.isInEditMode) {
         SideEffect {

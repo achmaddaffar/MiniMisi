@@ -1,5 +1,6 @@
-package com.daffa.minimisi.presentation.login
+package com.daffa.minimisi.presentation.register
 
+import android.content.pm.ActivityInfo
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.Orientation
 import androidx.compose.foundation.gestures.scrollable
@@ -16,6 +17,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material3.Button
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -23,6 +25,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -30,6 +33,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.navigation.NavController
 import com.daffa.minimisi.R
+import com.daffa.minimisi.presentation.components.LockScreenOrientation
 import com.daffa.minimisi.presentation.components.MiniMisiTextField
 import com.daffa.minimisi.presentation.ui.theme.IconSizeMedium
 import com.daffa.minimisi.presentation.ui.theme.Primary500
@@ -41,16 +45,17 @@ import com.daffa.minimisi.presentation.ui.theme.SpaceLarge
 import com.daffa.minimisi.presentation.ui.theme.SpaceMedium
 import com.daffa.minimisi.presentation.ui.theme.SpaceSmall
 import com.daffa.minimisi.presentation.ui.theme.Typography
-import com.daffa.minimisi.presentation.util.Navigation
 import com.daffa.minimisi.presentation.util.Screen
 import com.daffa.minimisi.presentation.util.state.TextFieldState
 import org.koin.androidx.compose.getViewModel
 
 @Composable
-fun LoginScreen(
+fun RegisterScreen(
     navController: NavController,
 ) {
-    val viewModel = getViewModel<LoginViewModel>()
+    LockScreenOrientation(orientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
+
+    val viewModel = getViewModel<RegisterViewModel>()
     val scrollState = rememberScrollState()
 
     Column(
@@ -76,10 +81,10 @@ fun LoginScreen(
             )
         }
 
-        Spacer(modifier = Modifier.height(SpaceExtremeLarge))
+        Spacer(modifier = Modifier.height(SpaceLarge))
 
         Text(
-            text = stringResource(R.string.hai_jumpa_kembali),
+            text = stringResource(R.string.selamat_datang),
             style = MaterialTheme.typography.headlineMedium.copy(
                 fontWeight = FontWeight.Bold
             )
@@ -88,11 +93,28 @@ fun LoginScreen(
         Spacer(modifier = Modifier.height(SpaceMedium))
 
         Text(
-            text = stringResource(R.string.login_desc),
+            text = stringResource(R.string.register_desc),
             style = MaterialTheme.typography.bodySmall.copy(color = Color.Black)
         )
 
         Spacer(modifier = Modifier.height(SpaceLarge))
+
+        MiniMisiTextField(
+            fieldColor = Color.White,
+            onValueChange = {
+                viewModel.setUsernameText(
+                    TextFieldState(
+                        text = it
+                    )
+                )
+            },
+            text = viewModel.usernameText.value.text,
+            error = viewModel.usernameText.value.error,
+            hint = stringResource(R.string.nama),
+            modifier = Modifier.fillMaxWidth()
+        )
+
+        Spacer(modifier = Modifier.height(SpaceMedium))
 
         MiniMisiTextField(
             fieldColor = Color.White,
@@ -135,6 +157,27 @@ fun LoginScreen(
 
         Spacer(modifier = Modifier.height(SpaceMedium))
 
+        MiniMisiTextField(
+            fieldColor = Color.White,
+            onValueChange = {
+                viewModel.setConfirmPasswordText(
+                    TextFieldState(
+                        text = it
+                    )
+                )
+            },
+            text = viewModel.confirmPasswordText.value.text,
+            error = viewModel.confirmPasswordText.value.error,
+            hint = stringResource(R.string.konfirmasi_password),
+            leadingIcon = painterResource(id = R.drawable.password_icon),
+            keyboardType = KeyboardType.Password,
+            showPasswordToggle = viewModel.showConfirmPassword.value,
+            onPasswordToggleClick = {
+                viewModel.setShowConfirmPassword(it)
+            },
+            modifier = Modifier.fillMaxWidth()
+        )
+
         Box(
             modifier = Modifier.fillMaxSize()
         ) {
@@ -146,14 +189,14 @@ fun LoginScreen(
             ) {
                 Button(
                     onClick = {
-                        navController.navigate(Navigation.HomeNavigation.route)
+                        navController.navigate(Screen.LoginScreen.route)
                     },
                     enabled = viewModel.isFieldFilled(),
                     modifier = Modifier
                         .fillMaxWidth()
                 ) {
                     Text(
-                        text = stringResource(R.string.masuk),
+                        text = stringResource(R.string.daftar),
                         style = MaterialTheme.typography.bodyLarge.copy(
                             color = Slate25
                         )
@@ -167,20 +210,20 @@ fun LoginScreen(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Text(
-                        text = stringResource(R.string.belum_punya_akun),
+                        text = stringResource(R.string.sudah_punya_akun),
                         style = MaterialTheme.typography.bodySmall.copy(
                             color = Slate600
                         )
                     )
                     Spacer(modifier = Modifier.width(SpaceSmall))
                     Text(
-                        text = stringResource(R.string.daftar_sekarang),
+                        text = stringResource(R.string.login),
                         style = Typography.bodySmall.copy(
                             color = Primary500,
                             fontWeight = FontWeight.Bold
                         ),
                         modifier = Modifier.clickable {
-                            navController.navigate(Screen.RegisterScreen.route)
+                            navController.navigate(Screen.LoginScreen.route)
                         }
                     )
                 }

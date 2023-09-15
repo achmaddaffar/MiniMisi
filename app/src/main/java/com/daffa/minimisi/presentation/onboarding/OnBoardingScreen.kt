@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material3.Button
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -35,6 +36,7 @@ import com.daffa.minimisi.presentation.ui.theme.Slate500
 import com.daffa.minimisi.presentation.ui.theme.Slate600
 import com.daffa.minimisi.presentation.ui.theme.Slate900
 import com.daffa.minimisi.presentation.ui.theme.SpaceExtremeLarge
+import com.daffa.minimisi.presentation.ui.theme.SpaceLarge
 import com.daffa.minimisi.presentation.ui.theme.SpaceSmall
 import com.daffa.minimisi.presentation.ui.theme.Typography
 import com.daffa.minimisi.presentation.util.Screen
@@ -75,7 +77,9 @@ fun OnBoardingScreen(
         verticalArrangement = Arrangement.SpaceEvenly
     ) {
         Row(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(end = SpaceLarge),
             horizontalArrangement = Arrangement.End
         ) {
             TextButton(
@@ -91,7 +95,7 @@ fun OnBoardingScreen(
             ) {
                 Text(
                     text = stringResource(R.string.skip),
-                    style = Typography.bodyMedium.copy(
+                    style = MaterialTheme.typography.bodyMedium.copy(
                         Slate900
                     )
                 )
@@ -122,7 +126,7 @@ fun OnBoardingScreen(
 
         Text(
             text = onBoardingItem[pagerState.currentPage].title,
-            style = Typography.headlineLarge.copy(
+            style = MaterialTheme.typography.headlineLarge.copy(
                 color = Slate900
             ),
             fontWeight = FontWeight.Bold,
@@ -132,7 +136,7 @@ fun OnBoardingScreen(
 
         Text(
             text = onBoardingItem[pagerState.currentPage].description,
-            style = Typography.bodyMedium.copy(
+            style = MaterialTheme.typography.bodyMedium.copy(
                 color = Slate600
             ),
             textAlign = TextAlign.Center,
@@ -146,16 +150,15 @@ fun OnBoardingScreen(
                         pagerState.animateScrollToPage(pagerState.currentPage + 1)
                     }
                 else
-                    navController.navigate(Screen.RegisterScreen.route) {
-                        popUpTo(Screen.RegisterScreen.route) {
-                            inclusive = true
-                        }
-                    }
-            }
+                    navController.navigate(Screen.RegisterScreen.route)
+            },
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = SpaceExtremeLarge)
         ) {
             Text(
                 text = onBoardingItem[pagerState.currentPage].buttonText,
-                style = Typography.bodyLarge.copy(
+                style = MaterialTheme.typography.bodyLarge.copy(
                     color = Slate25
                 )
             )
@@ -165,11 +168,12 @@ fun OnBoardingScreen(
             modifier = Modifier
                 .fillMaxWidth()
                 .alpha(if (pagerState.currentPage == onBoardingItem.size - 1) 1f else 0f),
-            horizontalArrangement = Arrangement.Center
+            horizontalArrangement = Arrangement.Center,
+            verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
                 text = stringResource(R.string.sudah_punya_akun),
-                style = Typography.bodySmall.copy(
+                style = MaterialTheme.typography.bodySmall.copy(
                     color = Slate600
                 )
             )
@@ -177,7 +181,8 @@ fun OnBoardingScreen(
             Text(
                 text = stringResource(R.string.login),
                 style = Typography.bodySmall.copy(
-                    color = Primary500
+                    color = Primary500,
+                    fontWeight = FontWeight.Bold
                 ),
                 modifier = Modifier.clickable {
                     navController.navigate(Screen.LoginScreen.route)

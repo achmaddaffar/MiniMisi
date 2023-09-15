@@ -14,4 +14,19 @@
     <string name="onboard_desc_2">Temukan \"misi\" yang\npaling cocok untuk kamu</string>
     <string name="onboard_title_3">Capai Mimpimu\ndengan MiniMisi</string>
     <string name="onboard_desc_3">Kami akan bantu menemukan \"misi\"\nyang paling sesuai sama kamu!</string>
+    <string name="back_icon">Back icon</string>
+    <string name="selamat_datang">Selamat Datang!</string>
+    <string name="register_desc">Mulai langkah awal perjalanan misimu disini.</string>
+    <string name="sembunyikan_password">Sembunyikan password</string>
+    <string name="perlihatkan_password">Perlihatkan password</string>
+    <string name="nama">Nama</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="konfirmasi_password">Konfirmasi Password</string>
+    <string name="daftar">Daftar</string>
+    <string name="daftar_sekarang">Daftar Sekarang</string>
+    <string name="belum_punya_akun">Belum punya akun?</string>
+    <string name="masuk">Masuk</string>
+    <string name="hai_jumpa_kembali">Hai, Jumpa Kembali!</string>
+    <string name="login_desc">Lanjutkan kembali misimu sekarang!</string>
 </resources>

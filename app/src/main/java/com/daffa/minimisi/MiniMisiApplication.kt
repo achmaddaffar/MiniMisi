@@ -1,6 +1,7 @@
 package com.daffa.minimisi
 
 import android.app.Application
+import com.daffa.minimisi.di.viewModelModule
 import org.koin.android.BuildConfig
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -17,7 +18,7 @@ class MiniMisiApplication : Application() {
             androidContext(this@MiniMisiApplication)
             modules(
                 listOf(
-
+                    viewModelModule
                 )
             )
         }
