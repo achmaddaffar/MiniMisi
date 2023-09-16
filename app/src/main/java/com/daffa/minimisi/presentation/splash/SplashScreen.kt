@@ -1,6 +1,7 @@
 package com.daffa.minimisi.presentation.splash
 
 import android.content.pm.ActivityInfo
+import android.util.Log
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
@@ -33,6 +34,8 @@ import com.daffa.minimisi.presentation.util.Navigation
 import com.daffa.minimisi.presentation.util.Screen
 import com.daffa.minimisi.util.Constants
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.delay
 
 @Composable
@@ -45,9 +48,12 @@ fun SplashScreen(
     val alpha = remember {
         Animatable(0f)
     }
-    val nextDestination = Screen.OnBoardingScreen.route
+    val isLoggedIn = Firebase.auth.uid != null
+    val nextDestination = if (isLoggedIn) Screen.HomeScreen.route else Screen.OnBoardingScreen.route
     val systemUiController = rememberSystemUiController()
     systemUiController.isStatusBarVisible = false
+
+    Log.e("Splash", Firebase.auth.uid.toString())
 
     LaunchedEffect(key1 = true) {
         alpha.animateTo(

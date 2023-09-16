@@ -23,4 +23,6 @@ interface IAuthUseCase {
     fun readUser(
         email: String
     ): Flow<Resource<User>>
+
+    fun logout()
 }

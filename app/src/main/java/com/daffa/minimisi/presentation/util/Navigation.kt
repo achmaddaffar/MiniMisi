@@ -9,7 +9,9 @@ import androidx.navigation.navigation
 import com.daffa.minimisi.presentation.home.HomeScreen
 import com.daffa.minimisi.presentation.login.LoginScreen
 import com.daffa.minimisi.presentation.onboarding.OnBoardingScreen
+import com.daffa.minimisi.presentation.profile.ProfileScreen
 import com.daffa.minimisi.presentation.register.RegisterScreen
+import com.daffa.minimisi.presentation.search.SearchScreen
 import com.daffa.minimisi.presentation.splash.SplashScreen
 
 @Composable
@@ -38,13 +40,13 @@ fun Navigation(
             HomeScreen(navController = navController)
         }
         composable(Screen.SearchScreen.route) {
-
+            SearchScreen(navController = navController)
         }
         composable(Screen.HistoryScreen.route) {
 
         }
         composable(Screen.ProfileScreen.route) {
-
+            ProfileScreen(navController = navController)
         }
     }
 }

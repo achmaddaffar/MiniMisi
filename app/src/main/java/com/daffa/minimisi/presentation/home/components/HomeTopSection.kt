@@ -1,6 +1,5 @@
 package com.daffa.minimisi.presentation.home.components
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -16,7 +15,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -25,11 +23,9 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.daffa.minimisi.R
 import com.daffa.minimisi.domain.model.User
-import com.daffa.minimisi.presentation.ui.theme.IconSizeMedium
 import com.daffa.minimisi.presentation.ui.theme.Primary500
 import com.daffa.minimisi.presentation.ui.theme.Slate900
 import com.daffa.minimisi.presentation.ui.theme.SpaceExtraSmall
-import com.daffa.minimisi.presentation.ui.theme.SpaceMedium
 import com.daffa.minimisi.presentation.ui.theme.SpaceSmall
 
 @Composable
@@ -67,7 +63,8 @@ fun HomeTopSection(
             ) {
                 Icon(
                     painter = painterResource(id = R.drawable.location_icon),
-                    contentDescription = stringResource(R.string.location)
+                    contentDescription = stringResource(R.string.location),
+                    tint = Primary500
                 )
                 Spacer(modifier = Modifier.width(SpaceExtraSmall))
                 Text(

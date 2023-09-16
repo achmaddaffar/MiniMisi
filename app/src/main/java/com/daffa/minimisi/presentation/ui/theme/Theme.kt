@@ -20,12 +20,13 @@ import androidx.core.view.WindowCompat
 private val LightColorScheme = lightColorScheme(
     primary = Primary500,
     secondary = Slate300,
-    tertiary = Primary50,
+    tertiary = Primary100,
     background = Slate25,
     onSurface = Primary500,
     onSurfaceVariant = Slate300,
     onSecondaryContainer = Primary500,
-    surface = Color.White
+    surface = Color.White,
+    secondaryContainer = Primary50
 
     /* Other default colors to override
     background = Color(0xFFFFFBFE),

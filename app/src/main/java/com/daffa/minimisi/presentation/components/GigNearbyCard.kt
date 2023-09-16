@@ -110,7 +110,7 @@ fun GigNearbyCard(
                 )
                 Spacer(modifier = Modifier.width(SpaceExtraSmall))
                 Text(
-                    text = gig.location,
+                    text = gig.distance.toString(),
                     style = MaterialTheme.typography.bodySmall.copy(
                         color = Slate400,
                         fontWeight = FontWeight.Bold

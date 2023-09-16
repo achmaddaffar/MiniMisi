@@ -13,4 +13,6 @@ interface IAuthRepository {
     fun loginUser(
         user: AuthUser
     ): Flow<Resource<String>>
+
+    fun logout()
 }

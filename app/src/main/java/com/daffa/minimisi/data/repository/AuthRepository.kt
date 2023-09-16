@@ -57,4 +57,6 @@ class AuthRepository(
             close()
         }
     }
+
+    override fun logout() = authDb.signOut()
 }
