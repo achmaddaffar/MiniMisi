@@ -23,16 +23,25 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.navigation.NavController
 import com.daffa.minimisi.R
+import com.daffa.minimisi.data.Resource
+import com.daffa.minimisi.data.model.AuthUser
+import com.daffa.minimisi.presentation.components.LoadingDialog
 import com.daffa.minimisi.presentation.components.LockScreenOrientation
 import com.daffa.minimisi.presentation.components.MiniMisiTextField
 import com.daffa.minimisi.presentation.ui.theme.IconSizeMedium
@@ -46,7 +55,10 @@ import com.daffa.minimisi.presentation.ui.theme.SpaceMedium
 import com.daffa.minimisi.presentation.ui.theme.SpaceSmall
 import com.daffa.minimisi.presentation.ui.theme.Typography
 import com.daffa.minimisi.presentation.util.Screen
+import com.daffa.minimisi.presentation.util.showMessage
 import com.daffa.minimisi.presentation.util.state.TextFieldState
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import org.koin.androidx.compose.getViewModel
 
 @Composable
@@ -57,6 +69,12 @@ fun RegisterScreen(
 
     val viewModel = getViewModel<RegisterViewModel>()
     val scrollState = rememberScrollState()
+    val coroutineScope = rememberCoroutineScope()
+    val context = LocalContext.current
+    var isDialog by remember { mutableStateOf(false) }
+
+    if(isDialog)
+        LoadingDialog()
 
     Column(
         modifier = Modifier
@@ -189,7 +207,24 @@ fun RegisterScreen(
             ) {
                 Button(
                     onClick = {
-                        navController.navigate(Screen.LoginScreen.route)
+                        coroutineScope.launch {
+                            viewModel.register().collect {
+                                isDialog = when(it) {
+                                    is Resource.Success -> {
+                                        context.showMessage(it.data.toString())
+                                        navController.navigate(Screen.LoginScreen.route)
+                                        false
+                                    }
+                                    is Resource.Error -> {
+                                        context.showMessage(it.message.toString())
+                                        false
+                                    }
+                                    is Resource.Loading -> {
+                                        true
+                                    }
+                                }
+                            }
+                        }
                     },
                     enabled = viewModel.isFieldFilled(),
                     modifier = Modifier

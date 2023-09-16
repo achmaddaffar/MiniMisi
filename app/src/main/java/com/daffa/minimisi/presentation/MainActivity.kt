@@ -19,8 +19,10 @@ import com.daffa.minimisi.presentation.navigation.MiniMisiBottomNavigationBar
 import com.daffa.minimisi.presentation.navigation.MiniMisiNavigationActions
 import com.daffa.minimisi.presentation.navigation.TOP_LEVEL_DESTINATION
 import com.daffa.minimisi.presentation.ui.theme.MiniMisiTheme
+import com.daffa.minimisi.presentation.ui.theme.Slate25
 import com.daffa.minimisi.presentation.util.Navigation
 import com.daffa.minimisi.presentation.util.Screen
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 class MainActivity : ComponentActivity() {
     @OptIn(ExperimentalMaterial3Api::class)
@@ -33,6 +35,9 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
+                    val systemUiController = rememberSystemUiController()
+                    systemUiController.setStatusBarColor(Slate25)
+
                     val navController = rememberNavController()
                     val navigationActions = remember(navController) {
                         MiniMisiNavigationActions(navController)

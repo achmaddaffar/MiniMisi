@@ -3,9 +3,12 @@ package com.daffa.minimisi.presentation.register
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
+import com.daffa.minimisi.domain.usecase.IAuthUseCase
 import com.daffa.minimisi.presentation.util.state.TextFieldState
 
-class RegisterViewModel() : ViewModel() {
+class RegisterViewModel(
+    private val useCase: IAuthUseCase,
+) : ViewModel() {
 
     private val _usernameText = mutableStateOf(TextFieldState())
     val usernameText: State<TextFieldState> = _usernameText
@@ -90,4 +93,7 @@ class RegisterViewModel() : ViewModel() {
         }
         return true
     }
+
+    fun register() =
+        useCase.register(emailText.value.text, passwordText.value.text)
 }

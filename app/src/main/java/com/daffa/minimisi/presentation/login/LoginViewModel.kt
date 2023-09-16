@@ -4,10 +4,13 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.daffa.minimisi.domain.usecase.IAuthUseCase
 import com.daffa.minimisi.presentation.util.state.TextFieldState
 import kotlinx.coroutines.launch
 
-class LoginViewModel() : ViewModel() {
+class LoginViewModel(
+    private val useCase: IAuthUseCase
+) : ViewModel() {
 
     private val _emailText = mutableStateOf(TextFieldState())
     val emailText: State<TextFieldState> = _emailText
@@ -49,17 +52,8 @@ class LoginViewModel() : ViewModel() {
         return true
     }
 
-//    fun login(email: String, password: String) {
-//        if (isPasswordValid())
-//            viewModelScope.launch {
-//                firebaseRepository.login(
-//                    email,
-//                    password
-//                ).collect {
-//                    _loginState.value = it
-//                }
-//            }
-//    }
+    fun login() =
+        useCase.login(emailText.value.text, passwordText.value.text)
 
     fun saveOnBoardingState(isCompleted: Boolean) {
 

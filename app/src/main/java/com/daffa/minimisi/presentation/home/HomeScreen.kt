@@ -21,10 +21,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.daffa.minimisi.R
+import com.daffa.minimisi.domain.model.Gig
 import com.daffa.minimisi.domain.model.User
+import com.daffa.minimisi.presentation.components.GigRecommendationCard
 import com.daffa.minimisi.presentation.home.components.HomeTopSection
 import com.daffa.minimisi.presentation.ui.theme.Slate400
 import com.daffa.minimisi.presentation.ui.theme.Slate900
@@ -84,7 +87,7 @@ fun HomeScreen(
         }
 
         item {
-            Spacer(modifier = Modifier.height(SpaceMedium))
+            Spacer(modifier = Modifier.height(SpaceLarge))
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -95,7 +98,8 @@ fun HomeScreen(
                 Text(
                     text = stringResource(R.string.rekomendasi_pekerjaan),
                     style = MaterialTheme.typography.bodyLarge.copy(
-                        color = Slate900
+                        color = Slate900,
+                        fontWeight = FontWeight.Bold
                     )
                 )
                 Text(
@@ -110,10 +114,56 @@ fun HomeScreen(
                 modifier = Modifier
                     .fillMaxWidth()
             ) {
+                item {
+                    Spacer(modifier = Modifier.width(SpaceExtraLarge))
+                }
                 items(3) {
-                    
+                    GigRecommendationCard(
+                        gig = Gig(
+                            gigName = "Divisi Kestari",
+                            employer = "Hology 6.0 FILKOM UB",
+                            wage = 35000.0,
+                            location = "Malang",
+                            date = "23j yang lalu"
+                        ),
+                        modifier = Modifier
+                            .size(
+                                width = 350.dp,
+                                height = 200.dp
+                            )
+                    )
+                    Spacer(modifier = Modifier.width(SpaceMedium))
+                }
+                item {
+                    Spacer(modifier = Modifier.width(SpaceMedium))
                 }
             }
+        }
+
+        item {
+            Spacer(modifier = Modifier.height(SpaceLarge))
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = SpaceExtraLarge),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                Text(
+                    text = "Pekerjaan Sekitarmu",
+                    style = MaterialTheme.typography.bodyLarge.copy(
+                        color = Slate900,
+                        fontWeight = FontWeight.Bold
+                    )
+                )
+                Text(
+                    text = stringResource(R.string.lihat_semua),
+                    style = MaterialTheme.typography.bodySmall.copy(
+                        Slate400
+                    )
+                )
+            }
+            Spacer(modifier = Modifier.height(SpaceMedium))
         }
     }
 }

@@ -1,6 +1,9 @@
 package com.daffa.minimisi
 
 import android.app.Application
+import com.daffa.minimisi.di.firebaseModule
+import com.daffa.minimisi.di.repositoryModule
+import com.daffa.minimisi.di.useCaseModule
 import com.daffa.minimisi.di.viewModelModule
 import org.koin.android.BuildConfig
 import org.koin.android.ext.koin.androidContext
@@ -18,7 +21,10 @@ class MiniMisiApplication : Application() {
             androidContext(this@MiniMisiApplication)
             modules(
                 listOf(
-                    viewModelModule
+                    firebaseModule,
+                    repositoryModule,
+                    useCaseModule,
+                    viewModelModule,
                 )
             )
         }

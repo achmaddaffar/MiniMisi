@@ -43,4 +43,6 @@
     <string name="news">News</string>
     <string name="lihat_semua">Lihat Semua</string>
     <string name="rekomendasi_pekerjaan">Rekomendasi Pekerjaan</string>
+    <string name="clock">Clock</string>
+    <string name="gig_doodle">Gig Doodle</string>
 </resources>
