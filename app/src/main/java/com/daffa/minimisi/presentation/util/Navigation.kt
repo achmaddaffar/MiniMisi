@@ -6,6 +6,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
+import com.daffa.minimisi.presentation.gigDetail.GigDetailScreen
 import com.daffa.minimisi.presentation.home.HomeScreen
 import com.daffa.minimisi.presentation.login.LoginScreen
 import com.daffa.minimisi.presentation.onboarding.OnBoardingScreen
@@ -47,6 +48,12 @@ fun Navigation(
         }
         composable(Screen.ProfileScreen.route) {
             ProfileScreen(navController = navController)
+        }
+        composable("${Screen.GigDetailScreen.route}/{id}") {
+            GigDetailScreen(
+                navController = navController,
+                it.arguments?.getString("id")
+            )
         }
     }
 }

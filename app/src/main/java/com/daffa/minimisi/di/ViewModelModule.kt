@@ -1,5 +1,6 @@
 package com.daffa.minimisi.di
 
+import com.daffa.minimisi.presentation.gigDetail.GigDetailViewModel
 import com.daffa.minimisi.presentation.home.HomeViewModel
 import com.daffa.minimisi.presentation.login.LoginViewModel
 import com.daffa.minimisi.presentation.profile.ProfileViewModel
@@ -16,4 +17,5 @@ val viewModelModule = module {
     viewModel { HomeViewModel(get(), get()) }
     viewModel { ProfileViewModel(get()) }
     viewModel { SearchViewModel() }
+    viewModel { GigDetailViewModel(get()) }
 }

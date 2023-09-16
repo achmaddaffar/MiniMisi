@@ -6,6 +6,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.daffa.minimisi.data.Resource
+import com.daffa.minimisi.data.model.GigModelResponse
 import com.daffa.minimisi.domain.model.Gig
 import com.daffa.minimisi.domain.model.User
 import com.daffa.minimisi.domain.usecase.IAuthUseCase
@@ -26,8 +27,8 @@ class HomeViewModel(
     private val _userCardLoading = mutableStateOf<Boolean>(true)
     val userCardLoading: State<Boolean> = _userCardLoading
 
-    private val _nearbyGigs = mutableStateOf<List<Gig>>(emptyList())
-    val nearbyGigs: State<List<Gig>> = _nearbyGigs
+    private val _nearbyGigs = mutableStateOf<List<GigModelResponse>>(emptyList())
+    val nearbyGigs: State<List<GigModelResponse>> = _nearbyGigs
 
     private val _nearbyGigsLoading = mutableStateOf(true)
     val nearbyGigsLoading: State<Boolean> = _nearbyGigsLoading

@@ -57,6 +57,7 @@ import com.daffa.minimisi.presentation.ui.theme.SpaceExtraSmall
 import com.daffa.minimisi.presentation.ui.theme.SpaceLarge
 import com.daffa.minimisi.presentation.ui.theme.SpaceMedium
 import com.daffa.minimisi.presentation.ui.theme.SpaceSmall
+import com.daffa.minimisi.presentation.util.Screen
 import com.daffa.minimisi.presentation.util.showMessage
 import com.valentinilk.shimmer.shimmer
 import kotlinx.coroutines.flow.collect
@@ -229,7 +230,7 @@ fun HomeScreen(
                 Card(
                     modifier = Modifier
                         .height(100.dp)
-                        .padding(horizontal = SpaceExtraLarge)
+                        .padding(horizontal = SpaceExtraLarge),
                 ) {
                     Box(
                         modifier = Modifier
@@ -249,11 +250,14 @@ fun HomeScreen(
         else
             items(nearbyGigs.size) { index ->
                 GigNearbyCard(
-                    gig = nearbyGigs[index],
+                    gig = nearbyGigs[index].item as Gig,
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(100.dp)
-                        .padding(horizontal = SpaceExtraLarge)
+                        .padding(horizontal = SpaceExtraLarge),
+                    onClick = {
+                        navController.navigate(Screen.GigDetailScreen.withArgs(nearbyGigs[index].key.toString()))
+                    }
                 )
                 Spacer(modifier = Modifier.height(SpaceMedium))
             }

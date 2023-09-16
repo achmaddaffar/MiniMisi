@@ -1,6 +1,5 @@
 package com.daffa.minimisi.data.repository
 
-import android.util.Log
 import com.daffa.minimisi.data.Resource
 import com.daffa.minimisi.data.model.GigModelResponse
 import com.daffa.minimisi.data.model.UserModelResponse
@@ -11,7 +10,6 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import com.google.firebase.database.ktx.getValue
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
@@ -93,7 +91,7 @@ class RealtimeDbRepository(
         }
     }
 
-    override fun getNearbyGigs(): Flow<Resource<List<Gig>>> = callbackFlow {
+    override fun getNearbyGigs(): Flow<Resource<List<GigModelResponse>>> = callbackFlow {
         trySend(Resource.Loading())
 
         val valueEvent = object : ValueEventListener {
@@ -104,11 +102,36 @@ class RealtimeDbRepository(
                         key = it.key
                     )
                 }
-                    .map {
-                        it.item!!
-                    }
 
                 trySend(Resource.Success(items))
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                trySend(Resource.Error(error.toString()))
+            }
+        }
+
+        gigDb.addValueEventListener(valueEvent)
+        awaitClose {
+            gigDb.removeEventListener(valueEvent)
+            close()
+        }
+    }
+
+    override fun getNearbyGigsById(id: String): Flow<Resource<GigModelResponse>> = callbackFlow {
+        trySend(Resource.Loading())
+
+        val valueEvent = object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val items = snapshot.children.map {
+                    GigModelResponse(
+                        it.getValue(Gig::class.java),
+                        key = it.key
+                    )
+                }
+                    .filter { it.key == id }
+
+                trySend(Resource.Success(items[0]))
             }
 
             override fun onCancelled(error: DatabaseError) {

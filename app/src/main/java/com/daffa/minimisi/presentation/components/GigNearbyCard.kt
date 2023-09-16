@@ -35,10 +35,12 @@ import com.daffa.minimisi.presentation.ui.theme.SpaceSmall
 @Composable
 fun GigNearbyCard(
     modifier: Modifier = Modifier,
+    onClick: () -> Unit = {},
     gig: Gig
 ) {
     Card(
-        modifier = modifier
+        modifier = modifier,
+        onClick = onClick
     ) {
         Box(
             modifier = Modifier
