@@ -3,6 +3,7 @@ package com.daffa.minimisi.presentation.register
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
+import com.daffa.minimisi.domain.model.User
 import com.daffa.minimisi.domain.usecase.IAuthUseCase
 import com.daffa.minimisi.presentation.util.state.TextFieldState
 
@@ -96,4 +97,11 @@ class RegisterViewModel(
 
     fun register() =
         useCase.register(emailText.value.text, passwordText.value.text)
+
+    fun addUserToDb() = useCase.addUserToDb(
+        User(
+            userId = null,
+            username = usernameText.value.text
+        )
+    )
 }

@@ -1,6 +1,7 @@
 package com.daffa.minimisi.domain.usecase
 
 import com.daffa.minimisi.data.Resource
+import com.daffa.minimisi.domain.model.User
 import kotlinx.coroutines.flow.Flow
 
 interface IAuthUseCase {
@@ -13,5 +14,9 @@ interface IAuthUseCase {
     fun register(
         email: String,
         password: String
+    ): Flow<Resource<String>>
+
+    fun addUserToDb(
+        user: User
     ): Flow<Resource<String>>
 }

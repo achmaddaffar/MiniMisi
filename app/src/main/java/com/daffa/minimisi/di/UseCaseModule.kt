@@ -5,5 +5,5 @@ import com.daffa.minimisi.domain.usecase.IAuthUseCase
 import org.koin.dsl.module
 
 val useCaseModule = module {
-    factory<IAuthUseCase> { AuthUseCase(get()) }
+    factory<IAuthUseCase> { AuthUseCase(get(), get()) }
 }

@@ -17,7 +17,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material3.Button
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -30,7 +29,6 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
@@ -40,7 +38,6 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.navigation.NavController
 import com.daffa.minimisi.R
 import com.daffa.minimisi.data.Resource
-import com.daffa.minimisi.data.model.AuthUser
 import com.daffa.minimisi.presentation.components.LoadingDialog
 import com.daffa.minimisi.presentation.components.LockScreenOrientation
 import com.daffa.minimisi.presentation.components.MiniMisiTextField
@@ -49,7 +46,6 @@ import com.daffa.minimisi.presentation.ui.theme.Primary500
 import com.daffa.minimisi.presentation.ui.theme.Slate25
 import com.daffa.minimisi.presentation.ui.theme.Slate600
 import com.daffa.minimisi.presentation.ui.theme.SpaceExtraLarge
-import com.daffa.minimisi.presentation.ui.theme.SpaceExtremeLarge
 import com.daffa.minimisi.presentation.ui.theme.SpaceLarge
 import com.daffa.minimisi.presentation.ui.theme.SpaceMedium
 import com.daffa.minimisi.presentation.ui.theme.SpaceSmall
@@ -58,6 +54,7 @@ import com.daffa.minimisi.presentation.util.Screen
 import com.daffa.minimisi.presentation.util.showMessage
 import com.daffa.minimisi.presentation.util.state.TextFieldState
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.zip
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.getViewModel
 
@@ -73,7 +70,7 @@ fun RegisterScreen(
     val context = LocalContext.current
     var isDialog by remember { mutableStateOf(false) }
 
-    if(isDialog)
+    if (isDialog)
         LoadingDialog()
 
     Column(
@@ -207,8 +204,8 @@ fun RegisterScreen(
             ) {
                 Button(
                     onClick = {
-                        coroutineScope.launch {
-                            viewModel.register().collect {
+                        coroutineScope.launch() {
+                            viewModel.register().zip(viewModel.addUserToDb()) { it, _ ->
                                 isDialog = when(it) {
                                     is Resource.Success -> {
                                         context.showMessage(it.data.toString())
@@ -224,6 +221,44 @@ fun RegisterScreen(
                                     }
                                 }
                             }
+                            viewModel.register().collect {
+                                isDialog = when (it) {
+                                    is Resource.Success -> {
+                                        viewModel.addUserToDb().collect { _ ->
+                                            context.showMessage(it.data.toString())
+                                            navController.navigate(Screen.LoginScreen.route)
+                                        }
+                                        false
+                                    }
+
+                                    is Resource.Error -> {
+                                        context.showMessage(it.message.toString())
+                                        false
+                                    }
+
+                                    is Resource.Loading -> {
+                                        true
+                                    }
+                                }
+                            }
+//                            viewModel.addUserToDb().collect {
+//                                isDialog = when (it) {
+//                                    is Resource.Success -> {
+//                                        context.showMessage(it.data.toString())
+//                                        navController.navigate(Screen.LoginScreen.route)
+//                                        false
+//                                    }
+//
+//                                    is Resource.Error -> {
+//                                        context.showMessage(it.message.toString())
+//                                        false
+//                                    }
+//
+//                                    is Resource.Loading -> {
+//                                        true
+//                                    }
+//                                }
+//                            }
                         }
                     },
                     enabled = viewModel.isFieldFilled(),
