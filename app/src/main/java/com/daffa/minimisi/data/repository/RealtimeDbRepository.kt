@@ -43,7 +43,7 @@ class RealtimeDbRepository(
         }
     }
 
-    override fun readUser(user: User): Flow<Resource<User>> = callbackFlow {
+    override fun readUser(email: String): Flow<Resource<User>> = callbackFlow {
         trySend(Resource.Loading())
 
         val valueEvent = object : ValueEventListener {
@@ -55,7 +55,7 @@ class RealtimeDbRepository(
                     )
                 }
 
-                val data = items.filter { it.item?.username == user.username }
+                val data = items.filter { it.item?.email == email }
                 trySend(Resource.Success(data[0].item as User))
             }
 

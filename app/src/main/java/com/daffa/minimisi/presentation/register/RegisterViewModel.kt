@@ -101,7 +101,8 @@ class RegisterViewModel(
     fun addUserToDb() = useCase.addUserToDb(
         User(
             userId = null,
-            username = usernameText.value.text
+            username = usernameText.value.text,
+            email = emailText.value.text
         )
     )
 }

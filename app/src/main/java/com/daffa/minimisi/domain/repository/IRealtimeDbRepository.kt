@@ -11,6 +11,6 @@ interface IRealtimeDbRepository {
     ): Flow<Resource<String>>
 
     fun readUser(
-        user: User
+        email: String
     ): Flow<Resource<User>>
 }

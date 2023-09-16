@@ -19,4 +19,8 @@ interface IAuthUseCase {
     fun addUserToDb(
         user: User
     ): Flow<Resource<String>>
+
+    fun readUser(
+        email: String
+    ): Flow<Resource<User>>
 }

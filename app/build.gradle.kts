@@ -56,8 +56,10 @@ android {
 }
 
 dependencies {
+    // Firebase
     implementation("com.google.firebase:firebase-auth-ktx:22.1.2")
     implementation("com.google.firebase:firebase-database-ktx:20.2.2")
+
     val koin_version = "3.4.3"
     val koin_android_version = "3.4.3"
     val koin_android_compose_version = "3.4.3"
@@ -134,7 +136,8 @@ dependencies {
     // DataStore Preferences
     implementation ("androidx.datastore:datastore-preferences:1.0.0")
 
-    // Firebase
+    // Shimmer
+    implementation("com.valentinilk.shimmer:compose-shimmer:1.0.5")
 
     // Room
     implementation("androidx.room:room-ktx:2.5.2")

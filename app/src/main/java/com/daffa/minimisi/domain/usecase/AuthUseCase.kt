@@ -28,4 +28,6 @@ class AuthUseCase(
         )
 
     override fun addUserToDb(user: User): Flow<Resource<String>> = dbRepository.addUser(user)
+
+    override fun readUser(email: String): Flow<Resource<User>> = dbRepository.readUser(email)
 }

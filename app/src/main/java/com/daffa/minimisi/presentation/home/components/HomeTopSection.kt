@@ -90,7 +90,7 @@ fun HomeTopSection(
             verticalArrangement = Arrangement.Center
         ) {
             AsyncImage(
-                model = user.profilePictureUrl,
+                model = user.profilePictureUrl ?: R.drawable.profile_picture,
                 contentDescription = stringResource(R.string.profile_picture),
                 contentScale = ContentScale.Crop,
                 modifier = Modifier

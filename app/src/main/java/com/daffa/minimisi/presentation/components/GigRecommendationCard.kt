@@ -58,7 +58,7 @@ fun GigRecommendationCard(
                     modifier = Modifier.padding(SpaceSmall)
                 ) {
                     Text(
-                        text = "Administrasi",
+                        text = gig.tag,
                         style = MaterialTheme.typography.bodySmall.copy(
                             color = Slate25
                         )
@@ -138,7 +138,8 @@ fun GigRecommendationCard(
                     Text(
                         text = gig.location,
                         style = MaterialTheme.typography.bodySmall.copy(
-                            color = Slate25
+                            color = Slate25,
+                            fontWeight = FontWeight.Bold
                         )
                     )
                 }

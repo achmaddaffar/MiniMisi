@@ -16,6 +16,7 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
@@ -27,6 +28,7 @@ import androidx.navigation.NavController
 import com.daffa.minimisi.R
 import com.daffa.minimisi.domain.model.Gig
 import com.daffa.minimisi.domain.model.User
+import com.daffa.minimisi.presentation.components.GigNearbyCard
 import com.daffa.minimisi.presentation.components.GigRecommendationCard
 import com.daffa.minimisi.presentation.home.components.HomeTopSection
 import com.daffa.minimisi.presentation.ui.theme.Slate400
@@ -34,27 +36,42 @@ import com.daffa.minimisi.presentation.ui.theme.Slate900
 import com.daffa.minimisi.presentation.ui.theme.SpaceExtraLarge
 import com.daffa.minimisi.presentation.ui.theme.SpaceLarge
 import com.daffa.minimisi.presentation.ui.theme.SpaceMedium
+import com.valentinilk.shimmer.shimmer
+import org.koin.androidx.compose.getViewModel
 
 @Composable
 fun HomeScreen(
     navController: NavController,
 ) {
+    val viewModel = getViewModel<HomeViewModel>()
+    val user by viewModel.user
+    val userLoading by viewModel.userCardLoading
+
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
             .padding(top = SpaceExtraLarge)
     ) {
         item {
-            HomeTopSection(
-                user = User(
-                    "Daffa Gaming"
-                ),
-                location = "Ngawi",
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(125.dp)
-                    .padding(horizontal = SpaceExtraLarge)
-            )
+            if (userLoading)
+                HomeTopSection(
+                    user = User(),
+                    location = "",
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(125.dp)
+                        .padding(horizontal = SpaceExtraLarge)
+                        .shimmer()
+                )
+            else
+                HomeTopSection(
+                    user = user,
+                    location = "Ngawi",
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(125.dp)
+                        .padding(horizontal = SpaceExtraLarge)
+                )
             Spacer(modifier = Modifier.height(SpaceLarge))
         }
 
@@ -124,7 +141,8 @@ fun HomeScreen(
                             employer = "Hology 6.0 FILKOM UB",
                             wage = 35000.0,
                             location = "Malang",
-                            date = "23j yang lalu"
+                            date = "23j yang lalu",
+                            tag = "Administrasi"
                         ),
                         modifier = Modifier
                             .size(
@@ -163,6 +181,26 @@ fun HomeScreen(
                     )
                 )
             }
+            Spacer(modifier = Modifier.height(SpaceMedium))
+        }
+
+        items(6) {
+            GigNearbyCard(
+                gig = Gig(
+                    gigName = "Pindah Kosan",
+                    employer = "Windah",
+                    wage = 70000.0,
+                    location = "Malang",
+                    date = "23j yang lalu",
+                    tag = "Pekerjaan Fisik",
+                    description = "desc",
+                    distance = "285 m"
+                ),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(100.dp)
+                    .padding(horizontal = SpaceExtraLarge)
+            )
             Spacer(modifier = Modifier.height(SpaceMedium))
         }
     }
