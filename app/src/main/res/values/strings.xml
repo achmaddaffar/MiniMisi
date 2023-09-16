@@ -29,4 +29,18 @@
     <string name="masuk">Masuk</string>
     <string name="hai_jumpa_kembali">Hai, Jumpa Kembali!</string>
     <string name="login_desc">Lanjutkan kembali misimu sekarang!</string>
+    <string name="home">Home</string>
+    <string name="home_greeting">Selamat Datang,</string>
+    <string name="location">Location</string>
+    <string name="profile_picture">Profile Picture</string>
+    <string name="beranda">Beranda</string>
+    <string name="search">Search</string>
+    <string name="cari">Cari</string>
+    <string name="history">History</string>
+    <string name="riwayat">Riwayat</string>
+    <string name="profile">Profile</string>
+    <string name="profil">Profil</string>
+    <string name="news">News</string>
+    <string name="lihat_semua">Lihat Semua</string>
+    <string name="rekomendasi_pekerjaan">Rekomendasi Pekerjaan</string>
 </resources>

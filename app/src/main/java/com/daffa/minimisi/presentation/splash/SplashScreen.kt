@@ -60,11 +60,7 @@ fun SplashScreen(
 
         systemUiController.isStatusBarVisible = true
         navController.popBackStack()
-        navController.navigate(nextDestination) {
-            popUpTo(nextDestination) {
-                inclusive = true
-            }
-        }
+        navController.navigate(nextDestination)
     }
 
     Column(

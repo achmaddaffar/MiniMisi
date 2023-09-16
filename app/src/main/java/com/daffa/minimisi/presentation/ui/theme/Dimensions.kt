@@ -10,10 +10,6 @@ val SpaceExtraLarge = 32.dp
 val SpaceUltraLarge = 40.dp
 val SpaceExtremeLarge = 64.dp
 
-val MascotSizeSmall = 100.dp
-val MascotSizeMedium = 150.dp
-val MascotSizeLarge = 200.dp
-
 val IconSizeSmall = 15.dp
 val IconSizeMedium = 25.dp
 val IconSizeLarge = 35.dp

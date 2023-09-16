@@ -29,6 +29,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.navigation.NavController
+import androidx.navigation.NavGraph.Companion.findStartDestination
 import com.daffa.minimisi.R
 import com.daffa.minimisi.presentation.components.MiniMisiTextField
 import com.daffa.minimisi.presentation.ui.theme.IconSizeMedium
@@ -146,7 +147,11 @@ fun LoginScreen(
             ) {
                 Button(
                     onClick = {
-                        navController.navigate(Navigation.HomeNavigation.route)
+                        navController.navigate(Screen.HomeScreen.route) {
+                            popUpTo(navController.graph.id) {
+                                inclusive = true
+                            }
+                        }
                     },
                     enabled = viewModel.isFieldFilled(),
                     modifier = Modifier
@@ -180,7 +185,12 @@ fun LoginScreen(
                             fontWeight = FontWeight.Bold
                         ),
                         modifier = Modifier.clickable {
-                            navController.navigate(Screen.RegisterScreen.route)
+                            navController.navigate(Screen.RegisterScreen.route) {
+                                popUpTo(Screen.LoginScreen.route) {
+                                    inclusive = true
+                                    saveState = true
+                                }
+                            }
                         }
                     )
                 }
